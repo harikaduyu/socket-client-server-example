@@ -18,7 +18,7 @@ if __name__ == "__main__":
             start = datetime.now()
             while True:
                 try:
-                    data = client_socket.recv(1024)
+                    data = client_socket.recv(4096)
                     if data:
                         messages = json.loads(data.decode('utf-8'))
                         messages = sorted(messages, key = lambda k: k['timestamp'])
