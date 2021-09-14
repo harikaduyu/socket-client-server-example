@@ -25,13 +25,13 @@ if __name__ == "__main__":
             while True:
                 try:
                     data = conn.recv(1024)
-                    if not data:
-                        break
-                    messages = json.loads(data.decode('utf-8'))
-                    queue += messages
+                    if data:
+                        messages = json.loads(data.decode('utf-8'))
+                        messages = sorted(messages, key = lambda k: k['timestamp'])
+                        queue += messages
+
                     elapsed = start - datetime.now()
                     if elapsed > timedelta(seconds=10) or len(queue) > 10:
-                        queue = sorted(queue, key = lambda k: k['timestamp'])
                         print(queue)
                         for q in queue:
                             print_stdout(q)
