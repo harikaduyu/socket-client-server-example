@@ -31,7 +31,6 @@ if __name__ == "__main__":
                         queue = []
                         start = datetime.now()
 
-                    conn.sendall(data) 
                 except Exception as e:
                     print("Got error: ")
                     print(e)
