@@ -11,14 +11,14 @@ if __name__ == "__main__":
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((HOST, PORT))
         s.listen()
-        conn, addr = s.accept()
-        with conn:
+        client_socket, addr = s.accept()
+        with client_socket:
             print('Connected by', addr)
             queue = []
             start = datetime.now()
             while True:
                 try:
-                    data = conn.recv(1024)
+                    data = client_socket.recv(1024)
                     if data:
                         messages = json.loads(data.decode('utf-8'))
                         messages = sorted(messages, key = lambda k: k['timestamp'])
